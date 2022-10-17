@@ -1,0 +1,35 @@
+﻿@{
+    ViewData["Title"] = "Home Page";
+}
+
+<section class="home-page">
+<div class="container-fluid text-center">
+    @if (!this.User.Identity.IsAuthenticated)
+    {
+        <h1>Welcome!</h1>
+    }
+    else
+    {
+        <h1>Welcome, @this.User.Identity.Name!</h1>
+    }
+    <hr class="hr-2 bg-secondary" />
+    <h4 class="mt-4">TaskBoard is here for all your tasks.</h4>
+    <br />
+</div>
+    <span class="boardSpan">Tasks: <b>@Model.AllTasksCount</b></span>
+    <ul">
+        @foreach (var board in Model.BoardsWithTasksCount)
+        {
+            <li class="col-md-6">
+                <span class="boardSpan">@board.BoardName: <b>@board.TasksCount</b></span>
+            </li>
+        }
+    </ul>
+    @if (Model.UserTasksCount > -1)
+    {
+        <h5 class="text-center">You have: <b>@Model.UserTasksCount</b> tasks</h5>
+    }
+    <div class="container-fluid mt-4">
+            <img style="width:100%" src="/images/to-do-list.jpg" class="img-thumbnail" />
+    </div>
+</section>
